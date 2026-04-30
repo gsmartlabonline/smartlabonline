@@ -8,31 +8,39 @@ const StudentLearning = () => {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    axios
-      .get("https://smartlabonline-backend-production.up.railway.app/api/lessons")
-      .then((res) => { 
-        const validLesson = res.data.find(
+  axios
+    .get("https://smartlabonline-backend-production.up.railway.app/api/lessons")
+    .then((res) => {
+      console.log("ALL LESSONS:", res.data);
+
+      const validLesson = res.data.find(
         (lesson) => lesson.paragraphs && lesson.paragraphs.length > 0
       );
 
+      console.log("SELECTED LESSON:", validLesson);
+
       setLesson(validLesson);
     })
-
     .catch((err) => console.error(err));
-  }, []);
+}, []);  
 
   if (!lesson) return <p>Loading...</p>;
 
-  if (!lesson.paragraphs || lesson.paragraphs.length === 0) {
+if (!lesson.paragraphs || lesson.paragraphs.length === 0) {
   return <p>No paragraphs available</p>;
-  }
+}
 
-  const paragraph = lesson.paragraphs[currentPara];
-  if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
+if (currentPara >= lesson.paragraphs.length) {
+  return <p>Lesson Completed 🎉</p>;
+}
+
+const paragraph = lesson.paragraphs[currentPara];
+
+if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
   return <p>No questions available</p>;
-  }
+}
 
-  const question = paragraph.questions[0];
+const question = paragraph.questions[0];  
 
   const checkAnswer = () => {
     if (selectedAnswer === question.correctAnswer) {
