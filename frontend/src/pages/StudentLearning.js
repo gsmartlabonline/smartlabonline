@@ -43,12 +43,22 @@ if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
 const question = paragraph.questions[0];  
 
   const checkAnswer = () => {
-    if (selectedAnswer === question.correctAnswer) {
-      setResult("Correct ✅");
-    } else {
-      setResult("Wrong ❌");
-    }
-  };
+  if (selectedAnswer === question.correctAnswer) {
+    setResult("Correct ✅");
+
+    localStorage.setItem(
+      paragraph.text,
+      "strong"
+    );
+  } else {
+    setResult("Wrong ❌");
+
+    localStorage.setItem(
+      paragraph.text,
+      "weak"
+    );
+  }
+};
 
   const nextParagraph = () => {
     setCurrentPara(currentPara + 1);
@@ -61,6 +71,9 @@ const question = paragraph.questions[0];
       <h2>{lesson.chapter}</h2>
 
       <p>{paragraph.text}</p>
+      <p>
+        Status: {localStorage.getItem(paragraph.text)}
+      </p>
 
       <h4>{question.question}</h4>
 
