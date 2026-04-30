@@ -10,7 +10,12 @@ const StudentLearning = () => {
   useEffect(() => {
     axios
       .get("https://smartlabonline-backend-production.up.railway.app/api/lessons")
-      .then((res) => setLesson(res.data[0]));
+      .then((res) => 
+      const validLesson = res.data.find(
+        (l) => l.paragraphs && l.paragraphs.length > 0
+      );
+
+    setLesson(validLesson);
   }, []);
 
   if (!lesson) return <p>Loading...</p>;
@@ -23,7 +28,7 @@ const StudentLearning = () => {
   if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
   return <p>No questions available</p>;
   }
-  
+
   const question = paragraph.questions[0];
 
   const checkAnswer = () => {

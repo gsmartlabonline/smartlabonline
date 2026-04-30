@@ -54,4 +54,9 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
+})
+
+app.delete("/api/lessons", async (req, res) => {
+  await Lesson.deleteMany({});
+  res.send("All lessons deleted");
 });
