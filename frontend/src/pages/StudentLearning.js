@@ -9,13 +9,21 @@ const StudentLearning = () => {
 
   useEffect(() => {
     axios
-      .get("https://smartlabonline-backend-production.up.railway.app")
+      .get("https://smartlabonline-backend-production.up.railway.app/api/lessons")
       .then((res) => setLesson(res.data[0]));
   }, []);
 
   if (!lesson) return <p>Loading...</p>;
 
+  if (!lesson.paragraphs || lesson.paragraphs.length === 0) {
+  return <p>No paragraphs available</p>;
+  }
+
   const paragraph = lesson.paragraphs[currentPara];
+  if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
+  return <p>No questions available</p>;
+  }
+  
   const question = paragraph.questions[0];
 
   const checkAnswer = () => {
