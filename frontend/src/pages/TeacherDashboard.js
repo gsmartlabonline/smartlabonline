@@ -8,8 +8,10 @@ function TeacherDashboard() {
   const [lessons, setLessons] = useState([]);
 
  const addLesson = async () => {
-  if (!chapter || !video || !notes) return;
-
+  if (!chapter || !video || !notes)  {
+  alert("Please fill all fields");
+    return;
+  } 
   const newLesson = {
     chapter,
     video,
@@ -18,7 +20,7 @@ function TeacherDashboard() {
 
   try {
     await axios.post(
-      "http://localhost:5000/api/lessons",
+      "http://smartlabonline-backend-production.up.railway.app/api/lessons",
       newLesson
     );
 

@@ -11,7 +11,7 @@ function CourseContent() {
   const fetchLessons = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/lessons"
+        "http://smartlabonline-backend-production.up.railway.app/api/lessons"
       );
       setChapters(response.data);
     } catch (error) {

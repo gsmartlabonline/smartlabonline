@@ -31,10 +31,7 @@ app.post("/api/lessons", async (req, res) => {
   try {
     const lesson = new Lesson(req.body);
     await lesson.save();
-    res.status(201).json({
-      message: "Lesson saved successfully",
-      lesson
-    });
+    res.status(201).json(lesson); 
   } catch (error) {
     res.status(500).json({
       error: error.message
@@ -57,4 +54,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
-});r
+});

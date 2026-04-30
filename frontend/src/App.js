@@ -5,7 +5,7 @@ import Quiz from "./pages/Quiz";
 import ParentDashboard from "./pages/ParentDashboard";
 import CourseContent from "./pages/CourseContent";
 import TeacherDashboard from "./pages/TeacherDashboard";
-
+import StudentLearning from "./pages/StudentLearning";
 function Home() {
   return (
     <div style={{ textAlign: "center", marginTop: "100px" }}>
@@ -39,6 +39,7 @@ function App() {
         <Route path="/parent-dashboard" element={<ParentDashboard />} />
         <Route path="/course-content" element={<CourseContent />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+        <Route path="/learn" element={<StudentLearning />} />
       </Routes>
     </BrowserRouter>
   );
