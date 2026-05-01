@@ -33,7 +33,11 @@ if (!lesson.paragraphs || lesson.paragraphs.length === 0) {
 if (currentPara >= lesson.paragraphs.length) {
   return <p>Lesson Completed 🎉</p>;
 }
+if (!lesson) return <p>Loading...</p>;
 
+if (currentPara >= lesson.paragraphs.length) {
+  return <h2>🎉 Lesson Completed!</h2>;
+}
 const paragraph = lesson.paragraphs[currentPara];
 
 if (!paragraph || !paragraph.questions || paragraph.questions.length === 0) {
@@ -61,10 +65,21 @@ const question = paragraph.questions[0];
 };
 
   const nextParagraph = () => {
-    setCurrentPara(currentPara + 1);
+  const currentStatus = localStorage.getItem(paragraph.text);
+
+  // If weak → repeat same paragraph
+  if (currentStatus === "weak") {
+    alert("Revising weak concept 🔁");
     setSelectedAnswer("");
     setResult("");
-  };
+    return;
+  }
+
+  // If strong → move forward
+  setCurrentPara((prev) => prev + 1);
+  setSelectedAnswer("");
+  setResult("");
+};
 
   return (
     <div style={{ padding: "20px" }}>
